@@ -5,25 +5,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="rock-paper-scissors.js"></script>
+    <script src="rock-paper-scissors.js" defer></script>
+    <style></style>
     <title>Document</title>
 </head>
 
 <body>
-    <p> The game can be played in the console, please open it with F12. </p>
-
-    <div class="form">
-        <input type="submit" value="Rock" class="userPlaysRock">
-        <input type="submit" value="Paper" class="userPlaysPaper">
-        <input type="submit" value="Scissors" class="userPlaysScissors">
+    <div class="game">
+        <p> Play a game of rock-paper-scissors against the computer. The first to 5 score wins.</p>
+        <div>Pick one of the options to play against it.</div>
+        <div class="form">
+            <button class="play-button" data-choice="rock">Play rock</button>
+            <button class="play-button" data-choice="paper">Play paper</button>
+            <button class="play-button" data-choice="scissors">Play scissors</button>
+        </div>
+        <div>Results of round <span class="current-round">0</span>:</div>
+        <ul>
+            <li>Round winner: <span class="round-winner">Play a round first!</span></li>
+            <li>Computer score: <span class="computer-score">0</span></li>
+            <li>Player score: <span class="player-score">0</span></li>
+        </ul>
+        <div>Have the computer play against itself for a custom amount of rounds:</div>
+        <input class="games-amount" value="1"></input> <button class="multiple-games">Start playing!</button>
+        <div class="error"></div>
     </div>
-    <div class="resultParas">
-        <p class="currentRound"></p>
-        <p class="userScore"></p>
-        <p class="computerScore"></p>
+
+    <div class="winnerDiv" style="display: none">
+        <div>The game has ended! The <span class="winner"></span> has won!</div>
+
+        <div>The final results were:</div>
+        <li>Computer score: <span class="final-computer-score"></span></li>
+        <li>Player score: <span class="final-player-score"></span></li>
+        <div><button class="play-again-button">Play again?</button></div>
     </div>
     <script>
-        game(5);
     </script>
 </body>
 
