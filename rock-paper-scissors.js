@@ -1,7 +1,7 @@
 // Global vars
-let currentRound = 0;
-let computerScore = 0;
-let playerScore = 0;
+let currentRound = 0
+let computerScore = 0
+let playerScore = 0
 
 // Select elements
 const currentRoundField = document.querySelector('.current-round')
@@ -17,11 +17,13 @@ const playMultipleGamesButton = document.querySelector('.multiple-games')
 const playAgainButton = document.querySelector('.play-again-button')
 const finalComputerScoreField = document.querySelector('.final-computer-score')
 const finalPlayerScoreField = document.querySelector('.final-player-score')
+const computerPlayed = document.querySelector('.computer-played')
+const playerPlayed = document.querySelector('.player-played')
 
 // Add listeners
 playButtons.forEach(button => button.addEventListener('click', function () {
     roundWinnerField.textContent = handleRoundResult(playRound(currentRound, this.dataset.choice))
-    currentRoundField.textContent = ++currentRound;
+    currentRoundField.textContent = ++currentRound
 }))
 
 playMultipleGamesButton.addEventListener('click', function () {
@@ -42,6 +44,8 @@ playAgainButton.addEventListener('click', function () {
     playerScore = 0
 
     roundWinnerField.textContent = "Play the first round!"
+    computerPlayed.textContent = ""
+    playerPlayed.textContent = ""
     currentRoundField.textContent = 0
     computerScoreField.textContent = 0
     playerScoreField.textContent = 0
@@ -54,75 +58,75 @@ playAgainButton.addEventListener('click', function () {
 
 function game(rounds) {
     for (let i = 1; i < rounds + 1; i++) {
-        let roundResult = playRound(i);
+        let roundResult = playRound(i)
         handleRoundResult(roundResult)
         currentRoundField.textContent = i
         console.log(playerScore)
-        console.log(computerScore);
+        console.log(computerScore)
     }
-    console.log(determineGameResult());
+    console.log(determineGameResult())
 }
 
 function playRound(round, playersPick) {
-    console.log("Now playing round " + round);
-    const computersPick = getComputersPick();
+    console.log("Now playing round " + round)
+    const computersPick = getComputersPick()
     if (!playersPick) {
-        playersPick = getComputersPick();
+        playersPick = getComputersPick()
     }
 
-    console.log("Computer has picked: " + computersPick);
-    console.log("Player has picked: " + playersPick);
+    computerPlayed.textContent = "Computer has picked: " + computersPick
+    playerPlayed.textContent = "Player has picked: " + playersPick
 
-    return determineRoundResult(playersPick, computersPick);
+    return determineRoundResult(playersPick, computersPick)
 }
 
 // Pick functions
 
 function getComputersPick() {
-    return convertPick(Math.floor(Math.random() * 3) + 1);
+    return convertPick(Math.floor(Math.random() * 3) + 1)
 }
 
 function getPlayersPick() {
-    return prompt("Please enter your pick").toLowerCase();
+    return prompt("Please enter your pick").toLowerCase()
 }
 
 function convertPick(computersPick) {
     switch (computersPick) {
         case 1:
-            return "rock";
+            return "Rock"
         case 2:
-            return "paper";
+            return "Paper"
         case 3:
-            return "scissors";
+            return "Scissors"
     }
 }
 
 // Result functions
 
 function isRoundTie(playersPick, computersPick) {
-    return playersPick === computersPick;
+    return playersPick === computersPick
 }
 
 function isPlayerWinsRound(playersPick, computersPick) {
-    return playersPick === "rock" && computersPick === "scissors" ||
-        playersPick === "scissors" && computersPick === "paper" ||
-        playersPick === "paper" && computersPick === "rock";
+    return playersPick === "Rock" && computersPick === "Scissors" ||
+        playersPick === "Scissors" && computersPick === "Paper" ||
+        playersPick === "Paper" && computersPick === "Rock"
 }
 
 function determineRoundResult(playersPick, computersPick) {
     if (isRoundTie(playersPick, computersPick)) {
-        console.log("It's a tie! Round over.");
+        console.log("It's a tie! Round over.")
     } else if (isPlayerWinsRound(playersPick, computersPick)) {
-        console.log("The player wins the round!");
-        return "Player";
+        console.log("The player wins the round!")
+        return "Player"
     } else {
-        console.log("The computer wins the round!");
-        return "Computer";
+        console.log("The computer wins the round!")
+        return "Computer"
     }
 }
 
 function determineGameResult() {
-    return playerScore > computerScore ? "The player wins the game!" : playerScore === computerScore ? "It's a tie! Game over." : "The computer wins the game!";
+    return playerScore > computerScore ? "The player wins the game!" : playerScore === computerScore ? "It's a tie! Game over." : "The computer wins the game!"
 }
 
 function handleRoundResult(roundResult) {
